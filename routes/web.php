@@ -65,8 +65,6 @@ Route::group(['middleware' => ['caffeinated']], function () {
             Route::post('/ReenviarFacturas','FeFacturasController@ReenviarFacturas');
 
 
-
-
             // Facturacion electronica Notas credito
             Route::resource('nc','FeNotasCreditoController');
             Route::post('nc/xml','FeNotasCreditoController@CrearXmlnc')->name('fe.nc.xml');
@@ -364,7 +362,6 @@ Route::group(['middleware' => ['caffeinated']], function () {
             Route::get('Details_Hl1_bitacoraomff','BitacoraOmffController@Details_Hl1');
 
 
-
             Route::resource('informecontrolentrega', 'InformeControlEntregaController');
             Route::get('informecontrolentrega_get','InformeControlEntregaController@index');
 
@@ -377,6 +374,8 @@ Route::group(['middleware' => ['caffeinated']], function () {
 
             Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
+
+            Route::get('get_materiales','ProdCievCodMaterialController@Materials');
         });
     });
 });

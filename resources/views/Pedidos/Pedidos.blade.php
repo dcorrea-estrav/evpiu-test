@@ -2,14 +2,6 @@
 
 @section('page_title', 'Pedidos')
 
-@section('module_title', 'Pedidos')
-
-@section('subtitle', 'Este módulo permite ver y crear Pedidos.')
-{{--
-@section('breadcrumbs')
-    {{ Breadcrumbs::render('fact_electr_facturas') }}
-@stop--}}
-
 @section('content')
     @can('pedidos.view')
         <div class="col-lg-12">
@@ -48,333 +40,6 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade bd-example-modal-xl" id="NewPedido" tabindex="-1" role="dialog" aria-labelledby="NewPedido" aria-hidden="true" style="overflow-y: scroll;">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="NewPedidoTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="" class="form-horizontal" id="FormPrincipal">
-                        <div class="modal-body">
-                            <div class="row" >
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="name" class="control-label" ><b>Vendedor:&nbsp;&nbsp; </b></label>
-                                        <select name="SelectVendedor" id="SelectVendedor" class="custom-select">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="name" class="control-label" ><b>Nombre Cliente:&nbsp;&nbsp;</b></label>
-                                        <input type="text" class="form-control" id="NombreCliente" name="NombreCliente" placeholder="Buscar Cliente">
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="name" class="control-label" ><b>Orden de Compra:&nbsp;&nbsp;</b></label>
-                                        <input type="text" class="form-control" value="" id="OrdComp" name="OrdComp">
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="name" class="control-label" ><b>Codigo Cliente:&nbsp;&nbsp;</b></label>
-                                        <input type="text" class="form-control" value="" id="CodCliente" name="CodCliente" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="name" class="control-label" ><b>Direccion:&nbsp;&nbsp;</b></label>
-                                        <input type="text" class="form-control" value="" id="address" name="address" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="name" class="control-label" ><b>Ciudad:&nbsp;&nbsp;</b></label>
-                                        <input type="text" class="form-control" value="" id="city" name="city" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="name" class="control-label" ><b>Telefono:&nbsp;&nbsp;</b></label>
-                                        <input type="text" class="form-control" value="" id="phone" name="phone" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="CondicionPago" class="control-label" ><b>Condicion de pago:&nbsp;&nbsp;</b></label>
-                                        <select name="CondicionPago" id="CondicionPago" class="form-control" disabled>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="name" class="control-label"><b>Descuento:&nbsp;&nbsp;</b></label>
-                                        <input type="text" class="form-control" value="0" id="descuento">
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label for="name" class="control-label"><b>IVA:&nbsp;&nbsp;</b></label>
-                                        <select name="SelectIva" id="SelectIva" class="form-control">
-                                            <option value="" selected>Seleccione...</option>
-                                            <option value="Y">Si</option>
-                                            <option value="N">No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="GeneralNotes"><b>Notas Generales:</b></label>
-                                        <textarea name="GeneralNotes" id="GeneralNotes" cols="71" rows="2" class="form-control"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th style="width: 25%">Producto</th>
-                                    <th style="width: 10%">Stock</th>
-                                    <th style="width: 12%">Arte</th>
-                                    <th style="width: 10%">Notas</th>
-                                    <th style="width: 10%">Unidad</th>
-                                    <th style="width: 8%">Precio</th>
-                                    <th style="width: 10%">Cantidad</th>
-                                    <th style="width: 17%">Total</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <input type="hidden" value="" id="CodigoProductoMax" name="CodigoProductoMax">
-                                        <input type="hidden" value="" id="DescripcionProductoMax" name="DescripcionProductoMax">
-
-                                        <td style="width: 25% !important; "><input type="text" id="ProductoMax" name="ProductoMax" class="form-control"></td>
-                                        <td style="width: 10%"><input type="number" id="StockItem" name="StockItem" class="form-control" readonly="readonly"></td>
-                                        <td style="width: 12%"><input type="text" id="AddArt" name="AddArt" class="form-control"></td>
-                                        <td style="width: 10%"><input type="text" id="AddNotes" name="AddNotes" class="form-control"></td>
-                                        <td style="width: 10%">
-                                            <select name="AddUnidad" id="AddUnidad" class="form-control">
-                                                <option value="Unidad" selected >Unidad</option>
-                                                <option value="Kilos">Kilos</option>
-                                                <option value="Millar">Millar</option>
-                                            </select>
-                                        </td>
-                                        <td style="width: 8%"><input type="number" id="AddPrice" name="AddPrice" class="form-control"></td>
-                                        <td style="width: 10%"><input type="number" id="AddQuantity" name="AddQuantity" class="form-control" value="1"></td>
-                                        <td style="width: 17%"><input type="text" id="TotalItem" name="TotalItem" class="form-control" readonly="readonly" value="0"></td>
-                                        <td><button type="button" class="btn btn-success btn-sm" id="AddItem" disabled><i class="fa fa-plus"></i></button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <br>
-                            <br>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered ItemsTable" id="ItemsTable">
-                                            <thead>
-                                                <tr>
-                                                    <th>Codigo</th>
-                                                    <th>Descripcion</th>
-                                                    <th>Arte</th>
-                                                    <th>Notas</th>
-                                                    <th>Unidad</th>
-                                                    <th>Precio</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Total</th>
-                                                    <th></th>
-                                                    <th style="display: none !important;"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="ProductosAdd">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="card-footer">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped first" id="TotalesTable">
-                                            <thead>
-                                                <tr>
-                                                    <th>Cantidad Items</th>
-                                                    <th>Valor Bruto</th>
-                                                    <th>Descuento</th>
-                                                    <th>Subtotal</th>
-                                                    <th>IVA</th>
-                                                    <th>Total Pedido</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="number" class="form-control totalCol" id="TotalQuantityItems" name="TotalQuantityItems" readonly="readonly"></td>
-                                                    <td><input type="number" class="form-control totalCol" id="TotalItemsBruto" name="TotalItemsBruto" readonly="readonly"></td>
-                                                    <td><input type="number" class="form-control" id="TotalItemsDiscount" name="TotalItemsDiscount" readonly="readonly"></td>
-                                                    <td><input type="number" class="form-control" id="TotalItemsSubtotal" name="TotalItemsSubtotal" readonly="readonly"></td>
-                                                    <td><input type="number" class="form-control" id="TotalItemsIva" name="TotalItemsIva" readonly="readonly"></td>
-                                                    <td><input type="number" class="form-control" id="TotalItemsPrice" name="TotalItemsPrice" readonly="readonly"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" id="SavePed">Crear Pedido</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade bd-example-modal-xl" id="PdfView" tabindex="-1" role="dialog" aria-labelledby="PdfView" aria-hidden="true" style="overflow-y: scroll;">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="PdfTitle"></h5>
-                    </div>
-                    <br>
-                    <div class="container">
-                        <ul class="progressbar">
-                            <li class="active" id="ProgBorrador"><a href="javascript:void(0);" style="color: #008000" class="StepBorrador">Borrador</a></li>
-                            <li class="" id="ProgCartera"><a href="javascript:void(0);" style="color: #7d7d7d" class="StepCartera" id="StepCartera">Cartera</a></li>
-                            <li id="ProgCostos"><a href="javascript:void(0);" style="color: #7d7d7d" class="StepCostos" id="StepCostos">Costos</a></li>
-                            <li id="ProgProduccion"><a href="javascript:void(0);" style="color: #7d7d7d" class="StepProduccion" id="StepProduccion">Produccion</a></li>
-                            <li id="ProgBodega"><a href="javascript:void(0);" style="color: #7d7d7d" class="StepBodega" id="StepBodega">Bodega</a></li>
-                        </ul>
-                    </div>
-                    <div align="center" style="text-align: center !important; margin-left: 70px; margin-right: 70px;">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated ProgressPed" role="progressbar" style="width: 80%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" id="ProgressPed"></div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="modal-body" id="TextoImprimir" name="TextoImprimir">
-                        <div class="wrapper">
-                            <section class="invoice">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h2 class="page-header">
-                                            <img src="/img/Logo_v2.png" alt="" style="width: 195px !important; height: 142px !important;" class="headers">
-                                            <small class="float-right">Fecha: <b><label id="Pdffecha"></label></b></small>
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div class="row invoice-info">
-                                    <div class="col-sm-4 invoice-col">
-                                        <address>
-                                            <strong>CI Estrada Velasquez y CIA. SAS</strong><br>
-                                            <b>NIT:</b> 890926617-8 <br>
-                                            <b>Telefono:</b> 265-66-65<br>
-                                            <b>Email:</b> Comercial@estradavelasquez.com <br>
-                                            <b>Direccion:</b> KR 55 # 29 C 14 - Zona industrial de belen.
-                                        </address>
-                                    </div>
-                                    <div class="col-sm-4 invoice-col">
-                                        <address>
-                                            <strong>Cliente: </strong><label id="PdfCliente"></label><br>
-                                            <b>Codigo Cliente:</b> <label id="PdfCodigoCliente"></label> <br>
-                                            <b>Ciudad:</b> <label id="PdfCity"></label><br>
-                                            <b>Direccion:</b> <label id="PdfAddress"></label> <br>
-                                            <b>Telefono:</b> <label id="PdfPhone"></label>
-                                        </address>
-                                    </div>
-                                    <div class="col-sm-4 invoice-col">
-                                        <b>Pedido #: </b><label id="PdfNumeroPedio"></label> <br>
-                                        <b>Orden Compra: </b><label id="PdfOrdenCompra"></label> <br>
-                                        <b>Condicion de pago: </b><label id="PdfCondicionPago"></label> <br>
-                                        <b>Vendedor: </b><label id="PdfVendedor"></label>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-12 table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th style="text-align: center">Codigo</th>
-                                                <th style="text-align: center">Descripcion</th>
-                                                <th style="text-align: center">Arte</th>
-                                                <th style="text-align: center">Notas</th>
-                                                <th style="text-align: center">Unidad</th>
-                                                <th style="text-align: center">Cantidad</th>
-                                                <th style="text-align: center">Precio</th>
-                                                <th style="text-align: center">Total</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="ItemsInvoice">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-12 table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center" >Valor Bruto</th>
-                                                    <th style="text-align: center">Descuento</th>
-                                                    <th style="text-align: center">Subtotal</th>
-                                                    <th style="text-align: center">IVA</th>
-                                                    <th style="text-align: center">Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td id="PdfBrutoInvoice" style="text-align: center"></td>
-                                                    <td id="PdfDescuentoInvoice" style="text-align: center"></td>
-                                                    <td id="PdfSubtotalInvoice" style="text-align: center"></td>
-                                                    <td id="PdfIvaInvoice"style="text-align: center"></td>
-                                                    <td id="PdfTotalInvoice" style="text-align: center"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row invoice-info">
-                                    <div class="col-sm-12 invoice-col">
-                                        <strong>NOTAS GENERALES:</strong> <label id="PdfGeneralNotes"></label><br>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary ImprimirPdf" id="ImprimirPdf">Imprimir</button>
-                        <button type="button" class="btn btn-secondary Cerrar" data-dismiss="modal" id="Cerrar">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade bd-example-modal-lg" id="ViewArtModal" tabindex="-1" role="dialog" aria-labelledby="ViewArtModal" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ViewArtTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" id="">
-                        <div id="ViewArtPdf" style="height:750px;" ></div>
-                    </div>
-                    <div class="modal-footer" style="text-align: center !important;">
-                        <button class="btn btn-primary" data-dismiss="modal" id="CloseViewArt">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -1765,3 +1430,331 @@
 
     @endpush
 @stop
+@section('modal')
+    <div class="modal fade bd-example-modal-xl" id="NewPedido" tabindex="-1" role="dialog" aria-labelledby="NewPedido" aria-hidden="true" style="overflow-y: scroll;">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="NewPedidoTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" class="form-horizontal" id="FormPrincipal">
+                    <div class="modal-body">
+                        <div class="row" >
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name" class="control-label" ><b>Vendedor:&nbsp;&nbsp; </b></label>
+                                    <select name="SelectVendedor" id="SelectVendedor" class="custom-select">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name" class="control-label" ><b>Nombre Cliente:&nbsp;&nbsp;</b></label>
+                                    <input type="text" class="form-control" id="NombreCliente" name="NombreCliente" placeholder="Buscar Cliente">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name" class="control-label" ><b>Orden de Compra:&nbsp;&nbsp;</b></label>
+                                    <input type="text" class="form-control" value="" id="OrdComp" name="OrdComp">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name" class="control-label" ><b>Codigo Cliente:&nbsp;&nbsp;</b></label>
+                                    <input type="text" class="form-control" value="" id="CodCliente" name="CodCliente" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name" class="control-label" ><b>Direccion:&nbsp;&nbsp;</b></label>
+                                    <input type="text" class="form-control" value="" id="address" name="address" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name" class="control-label" ><b>Ciudad:&nbsp;&nbsp;</b></label>
+                                    <input type="text" class="form-control" value="" id="city" name="city" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name" class="control-label" ><b>Telefono:&nbsp;&nbsp;</b></label>
+                                    <input type="text" class="form-control" value="" id="phone" name="phone" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="CondicionPago" class="control-label" ><b>Condicion de pago:&nbsp;&nbsp;</b></label>
+                                    <select name="CondicionPago" id="CondicionPago" class="form-control" disabled>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name" class="control-label"><b>Descuento:&nbsp;&nbsp;</b></label>
+                                    <input type="text" class="form-control" value="0" id="descuento">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name" class="control-label"><b>IVA:&nbsp;&nbsp;</b></label>
+                                    <select name="SelectIva" id="SelectIva" class="form-control">
+                                        <option value="" selected>Seleccione...</option>
+                                        <option value="Y">Si</option>
+                                        <option value="N">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="GeneralNotes"><b>Notas Generales:</b></label>
+                                    <textarea name="GeneralNotes" id="GeneralNotes" cols="71" rows="2" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th style="width: 25%">Producto</th>
+                                <th style="width: 10%">Stock</th>
+                                <th style="width: 12%">Arte</th>
+                                <th style="width: 10%">Notas</th>
+                                <th style="width: 10%">Unidad</th>
+                                <th style="width: 8%">Precio</th>
+                                <th style="width: 10%">Cantidad</th>
+                                <th style="width: 17%">Total</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <input type="hidden" value="" id="CodigoProductoMax" name="CodigoProductoMax">
+                                <input type="hidden" value="" id="DescripcionProductoMax" name="DescripcionProductoMax">
+
+                                <td style="width: 25% !important; "><input type="text" id="ProductoMax" name="ProductoMax" class="form-control"></td>
+                                <td style="width: 10%"><input type="number" id="StockItem" name="StockItem" class="form-control" readonly="readonly"></td>
+                                <td style="width: 12%"><input type="text" id="AddArt" name="AddArt" class="form-control"></td>
+                                <td style="width: 10%"><input type="text" id="AddNotes" name="AddNotes" class="form-control"></td>
+                                <td style="width: 10%">
+                                    <select name="AddUnidad" id="AddUnidad" class="form-control">
+                                        <option value="Unidad" selected >Unidad</option>
+                                        <option value="Kilos">Kilos</option>
+                                        <option value="Millar">Millar</option>
+                                    </select>
+                                </td>
+                                <td style="width: 8%"><input type="number" id="AddPrice" name="AddPrice" class="form-control"></td>
+                                <td style="width: 10%"><input type="number" id="AddQuantity" name="AddQuantity" class="form-control" value="1"></td>
+                                <td style="width: 17%"><input type="text" id="TotalItem" name="TotalItem" class="form-control" readonly="readonly" value="0"></td>
+                                <td><button type="button" class="btn btn-success btn-sm" id="AddItem" disabled><i class="fa fa-plus"></i></button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered ItemsTable" id="ItemsTable">
+                                        <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Descripcion</th>
+                                            <th>Arte</th>
+                                            <th>Notas</th>
+                                            <th>Unidad</th>
+                                            <th>Precio</th>
+                                            <th>Cantidad</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                            <th style="display: none !important;"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="ProductosAdd">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card-footer">
+                                <div class="table-responsive">
+                                    <table class="table table-striped first" id="TotalesTable">
+                                        <thead>
+                                        <tr>
+                                            <th>Cantidad Items</th>
+                                            <th>Valor Bruto</th>
+                                            <th>Descuento</th>
+                                            <th>Subtotal</th>
+                                            <th>IVA</th>
+                                            <th>Total Pedido</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><input type="number" class="form-control totalCol" id="TotalQuantityItems" name="TotalQuantityItems" readonly="readonly"></td>
+                                            <td><input type="number" class="form-control totalCol" id="TotalItemsBruto" name="TotalItemsBruto" readonly="readonly"></td>
+                                            <td><input type="number" class="form-control" id="TotalItemsDiscount" name="TotalItemsDiscount" readonly="readonly"></td>
+                                            <td><input type="number" class="form-control" id="TotalItemsSubtotal" name="TotalItemsSubtotal" readonly="readonly"></td>
+                                            <td><input type="number" class="form-control" id="TotalItemsIva" name="TotalItemsIva" readonly="readonly"></td>
+                                            <td><input type="number" class="form-control" id="TotalItemsPrice" name="TotalItemsPrice" readonly="readonly"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="SavePed">Crear Pedido</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-xl" id="PdfView" tabindex="-1" role="dialog" aria-labelledby="PdfView" aria-hidden="true" style="overflow-y: scroll;">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="PdfTitle"></h5>
+                </div>
+                <br>
+                <div class="container">
+                    <ul class="progressbar">
+                        <li class="active" id="ProgBorrador"><a href="javascript:void(0);" style="color: #008000" class="StepBorrador">Borrador</a></li>
+                        <li class="" id="ProgCartera"><a href="javascript:void(0);" style="color: #7d7d7d" class="StepCartera" id="StepCartera">Cartera</a></li>
+                        <li id="ProgCostos"><a href="javascript:void(0);" style="color: #7d7d7d" class="StepCostos" id="StepCostos">Costos</a></li>
+                        <li id="ProgProduccion"><a href="javascript:void(0);" style="color: #7d7d7d" class="StepProduccion" id="StepProduccion">Produccion</a></li>
+                        <li id="ProgBodega"><a href="javascript:void(0);" style="color: #7d7d7d" class="StepBodega" id="StepBodega">Bodega</a></li>
+                    </ul>
+                </div>
+                <div align="center" style="text-align: center !important; margin-left: 70px; margin-right: 70px;">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated ProgressPed" role="progressbar" style="width: 80%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" id="ProgressPed"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="modal-body" id="TextoImprimir" name="TextoImprimir">
+                    <div class="wrapper">
+                        <section class="invoice">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="page-header">
+                                        <img src="/img/Logo_v2.png" alt="" style="width: 195px !important; height: 142px !important;" class="headers">
+                                        <small class="float-right">Fecha: <b><label id="Pdffecha"></label></b></small>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="row invoice-info">
+                                <div class="col-sm-4 invoice-col">
+                                    <address>
+                                        <strong>CI Estrada Velasquez y CIA. SAS</strong><br>
+                                        <b>NIT:</b> 890926617-8 <br>
+                                        <b>Telefono:</b> 265-66-65<br>
+                                        <b>Email:</b> Comercial@estradavelasquez.com <br>
+                                        <b>Direccion:</b> KR 55 # 29 C 14 - Zona industrial de belen.
+                                    </address>
+                                </div>
+                                <div class="col-sm-4 invoice-col">
+                                    <address>
+                                        <strong>Cliente: </strong><label id="PdfCliente"></label><br>
+                                        <b>Codigo Cliente:</b> <label id="PdfCodigoCliente"></label> <br>
+                                        <b>Ciudad:</b> <label id="PdfCity"></label><br>
+                                        <b>Direccion:</b> <label id="PdfAddress"></label> <br>
+                                        <b>Telefono:</b> <label id="PdfPhone"></label>
+                                    </address>
+                                </div>
+                                <div class="col-sm-4 invoice-col">
+                                    <b>Pedido #: </b><label id="PdfNumeroPedio"></label> <br>
+                                    <b>Orden Compra: </b><label id="PdfOrdenCompra"></label> <br>
+                                    <b>Condicion de pago: </b><label id="PdfCondicionPago"></label> <br>
+                                    <b>Vendedor: </b><label id="PdfVendedor"></label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th style="text-align: center">Codigo</th>
+                                            <th style="text-align: center">Descripcion</th>
+                                            <th style="text-align: center">Arte</th>
+                                            <th style="text-align: center">Notas</th>
+                                            <th style="text-align: center">Unidad</th>
+                                            <th style="text-align: center">Cantidad</th>
+                                            <th style="text-align: center">Precio</th>
+                                            <th style="text-align: center">Total</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="ItemsInvoice">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th style="text-align: center" >Valor Bruto</th>
+                                            <th style="text-align: center">Descuento</th>
+                                            <th style="text-align: center">Subtotal</th>
+                                            <th style="text-align: center">IVA</th>
+                                            <th style="text-align: center">Total</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td id="PdfBrutoInvoice" style="text-align: center"></td>
+                                            <td id="PdfDescuentoInvoice" style="text-align: center"></td>
+                                            <td id="PdfSubtotalInvoice" style="text-align: center"></td>
+                                            <td id="PdfIvaInvoice"style="text-align: center"></td>
+                                            <td id="PdfTotalInvoice" style="text-align: center"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row invoice-info">
+                                <div class="col-sm-12 invoice-col">
+                                    <strong>NOTAS GENERALES:</strong> <label id="PdfGeneralNotes"></label><br>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ImprimirPdf" id="ImprimirPdf">Imprimir</button>
+                    <button type="button" class="btn btn-secondary Cerrar" data-dismiss="modal" id="Cerrar">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="ViewArtModal" tabindex="-1" role="dialog" aria-labelledby="ViewArtModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ViewArtTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="">
+                    <div id="ViewArtPdf" style="height:750px;" ></div>
+                </div>
+                <div class="modal-footer" style="text-align: center !important;">
+                    <button class="btn btn-primary" data-dismiss="modal" id="CloseViewArt">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

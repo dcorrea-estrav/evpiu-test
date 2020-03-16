@@ -67,6 +67,7 @@
                 </div>
             </div>
         </div>
+        <br>
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
                 <div class="card testvisual">
@@ -96,7 +97,7 @@
                                 <br>
                                 <button class="btn btn-light SubirArchiv" id="{{ $var }}" style="width: 90px; height: 80px;"><i class="fa fa-file"></i>
                                     <br>Subir archivos</button>
-                                <button class="btn btn-light EnvRender" id="{{ $var }}" style="width: 90px; height: 80px;"><i class="far fa-paper-plane"></i>
+                                <button class="btn btn-light EnvRender" id="{{ $var }}" style="width: 90px; height: 80px;"><i class="fas fa-paper-plane"></i>
                                     <br>Enviar a render</button>
                                 <button class="btn btn-light CambEstreq" id="{{ $var }}" style="width: 90px; height: 80px;"><i class="fas fa-exchange-alt"></i>
                                     <br>Cambiar estado</button>
@@ -114,6 +115,7 @@
                 </div>
             </div>
         </div>
+        <br>
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
